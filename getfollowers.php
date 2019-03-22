@@ -8,7 +8,7 @@ $connection = $twitter->connect();
 
 $username= $_REQUEST['twitter_username'];
 
-echo "<a role='btn' class='btn btn-primary' href='/dir/twitter/index'>Go Back</a>";
+echo "<a role='btn' class='btn btn-primary' href='index.php'>Go Back</a>";
 
 $saveArr = array();
 $followers1 = $connection->get('followers/list', array('screen_name' => $username, 'count' => 200));
