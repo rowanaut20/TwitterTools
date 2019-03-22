@@ -1,11 +1,14 @@
 <?php
 
-// Require the TwitterOAuth library. http://github.com/abraham/twitteroauth
-require_once('twitteroauth/twitteroauth.php');
-$connection = new TwitterOAuth('', '', '', '');
-$username= $_POST['twitter_username'];
+require_once('functions.php');
 
-echo "<a role='btn' class='btn btn-primary' href='index'>Go Back</a>";
+$twitter = new Twitter();
+
+$connection = $twitter->connect();
+
+$username= $_REQUEST['twitter_username'];
+
+echo "<a role='btn' class='btn btn-primary' href='/dir/twitter/index'>Go Back</a>";
 
 $saveArr = array();
 $followers1 = $connection->get('followers/list', array('screen_name' => $username, 'count' => 200));
@@ -26,10 +29,11 @@ echo "<h2>No followers :(</h2>";
 
 $count = 0;
 
+sort($followersArr);
+
 foreach ($followersArr as $follow) {
     $val = $follow['val'];
-    echo "<a href='https://twitter.com/".$val."'>@".$val."</a> - ";
-    echo $saveArr[$count]['name']."<br>";
+    echo "<a target='_blank' href='https://twitter.com/".$val."'>@".$val."</a><br>";
     $count += 1;
 }
 
